@@ -1,0 +1,95 @@
+﻿@using TreeViewMVC.Models
+@model List<Index.TreeNode>
+
+<style>
+    .tree-container {
+        display: flex;
+        /*justify-content: center;
+        align-items: center;*/
+        height: 100vh;
+        background-color: #f9f9f9;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .tree-panel {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        width: auto;
+    }
+    .hidden {
+        display: none;
+    }
+
+    .toggle {
+        cursor: pointer;
+        display: inline-block;
+        padding: 2px 5px;
+        border-radius: 3px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+        .toggle:hover {
+            background-color: #f0f0f0;
+        }
+
+        .toggle.expanded::before {
+            content: '🡾';
+        }
+
+        .toggle::before {
+            content: '🡺';
+        }
+
+    .count {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .tree ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .tree li {
+        margin: 5px 0;
+    }
+
+        .tree li ul {
+            margin-left: 20px;
+        }
+</style>
+
+<div class="tree-container">
+    <div class="tree-panel">
+        <div class="tree">
+            <ul>
+                @foreach (var root in Model)
+                {
+                    @Html.Partial("_TreeNode", root)
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+        <script>
+            function toggleChildren(element) {
+                var children = element.nextElementSibling;
+                if (children) {
+                    if (children.classList.contains('hidden')) {
+                        children.classList.remove('hidden');
+                        element.classList.add('expanded');
+                    } else {
+                        children.classList.add('hidden');
+                        element.classList.remove('expanded');
+                    }
+                }
+            }
+        </script>

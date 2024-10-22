@@ -1,0 +1,20 @@
+﻿@model TreeViewMVC.Models.Index.TreeNode
+
+@if (Model != null)
+{
+    <li>
+        <span class="toggle" onclick="toggleChildren(this)">
+            @Model.Text
+        </span>
+        @if (Model.Children != null && Model.Children.Any())
+        {
+            <ul class="hidden">
+                @foreach (var child in Model.Children)
+                {
+                    @Html.Partial("_TreeNode", child)
+                }
+            </ul>
+        }
+    </li>
+}
+
